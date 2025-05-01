@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toko Sembako Murah</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+    header { background: #27ae60; color: white; padding: 1rem; text-align: center; }
+    .search-bar, .kategori-filter { margin: 1rem auto; max-width: 600px; display: flex; gap: 0.5rem; }
+    .search-bar input, .kategori-filter select { padding: 0.5rem; width: 100%; }
+    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; padding: 1rem; }
+    .product { background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 0 10px #ddd; text-align: center; }
+    .product img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
+    .product button { margin-top: 0.5rem; background: #2ecc71; color: white; border: none; padding: 0.5rem 1rem; cursor: pointer; border-radius: 5px; }
+    .pembayaran { text-align: center; padding: 1rem; }
+    .pembayaran img { height: 40px; margin: 0.5rem; vertical-align: middle; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Toko Sembako Iseng Aja By Uuss</h1>
+</header>
+
+<div class="search-bar">
+  <input type="text" id="search" placeholder="Cari produk..." oninput="filterProduk()" />
+</div>
+
+<div class="kategori-filter">
+  <select id="kategori" onchange="filterProduk()">
+    <option value="semua">Semua Kategori</option>
+    <option value="beras">Beras</option>
+    <option value="minyak">Minyak</option>
+    <option value="telur">Telur</option>
+    <option value="mie">Mie Instan</option>
+    <option value="gula">Gula</option>
+  </select>
+</div>
+
+<div class="products" id="productList">
+  <div class="product" data-nama="Beras Premium" data-kategori="beras">
+    <img src="img/beras.jpg" alt="Beras">
+    <h3>Beras Premium 5kg</h3>
+    <p>Rp 65.000</p>
+    <a href="https://wa.me/62881025138150?text=Saya%20mau%20beli%20Beras%20Premium"><button>Beli via WhatsApp</button></a>
+  </div>
+  <div class="product" data-nama="Minyak Goreng" data-kategori="minyak">
+    <img src="img/minyak.jpg" alt="Minyak">
+    <h3>Minyak Goreng 2L</h3>
+    <p>Rp 38.000</p>
+    <a href="https://wa.me/62881025138150?text=Saya%20mau%20beli%20Minyak%20Goreng"><button>Beli via WhatsApp</button></a>
+  </div>
+  <div class="product" data-nama="Telur Ayam" data-kategori="telur">
+    <img src="img/telur.jpeg" alt="Telur">
+    <h3>Telur Ayam 1kg</h3>
+    <p>Rp 26.000</p>
+    <a href="https://wa.me/62881025138150?text=Saya%20mau%20beli%20Telur%20Ayam"><button>Beli via WhatsApp</button></a>
+  </div>
+  <div class="product" data-nama="Mie Instan" data-kategori="mie">
+    <img src="img/mie.png" alt="Mie">
+    <h3>Mie Instan (10 pcs)</h3>
+    <p>Rp 23.000</p>
+    <a href="https://wa.me/62881025138150?text=Saya%20mau%20beli%20Mie%20Instan"><button>Beli via WhatsApp</button></a>
+  </div>
+  <div class="product" data-nama="Gula Pasir" data-kategori="gula">
+    <img src="img/gula.jpeg" alt="Gula">
+    <h3>Gula Pasir 1kg</h3>
+    <p>Rp 15.000</p>
+    <a href="https://wa.me/62881025138150?text=Saya%20mau%20beli%20Gula%20Pasir"><button>Beli via WhatsApp</button></a>
+  </div>
+</div>
+
+<div class="pembayaran">
+  <h3>Pembayaran Tersedia:</h3>
+  <img src="img/dana.png" alt="Dana" />
+  <img src="img/gopay.png" alt="GoPay" />
+  <img src="img/qris.png" alt="QRIS" />
+  <img src="img/shoope.png" alt="ShopeePay" />
+  <img src="img/ovo.jpg" alt="OVO" />
+  <img src="img/bank.png" alt="Bank Transfer" />
+</div>
+
+<script>
+  function filterProduk() {
+    const keyword = document.getElementById('search').value.toLowerCase();
+    const kategori = document.getElementById('kategori').value;
+    const products = document.querySelectorAll('.product');
+
+    products.forEach(product => {
+      const nama = product.getAttribute('data-nama').toLowerCase();
+      const kategoriProduk = product.getAttribute('data-kategori');
+
+      if (
+        (nama.includes(keyword)) &&
+        (kategori === 'semua' || kategoriProduk === kategori)
+      ) {
+        product.style.display = 'block';
+      } else {
+        product.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
